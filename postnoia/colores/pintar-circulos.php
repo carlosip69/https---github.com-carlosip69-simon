@@ -6,7 +6,9 @@
     // <circle cx="100" cy="100" r="50" fill="#e74c3c" />  
     // </svg>  
     //$patron_json = json_encode($patron);
-
+    session_start();
+    $_SESSION['ncolores'] = $_POST['ncolores'];
+    $_SESSION['ncirculos'] = $_POST['ncirculos'];
     $colores=array(
         'azul'=> '#0000FF',  
         'rojo'=> '#ff0000',  
@@ -19,8 +21,8 @@
     );   
 
 // Recoger los datos del formulario 
-$ncolores = (int) $_POST['ncolores'];
-$ncirculos = (int) $_POST['ncirculos'];
+$ncolores =  $_SESSION['ncolores'] ;
+$ncirculos =  $_SESSION['ncolores'] ;
 
 // Seleccionar los colores disponibles
 
@@ -36,7 +38,7 @@ for ($i = 0; $i < $ncirculos; $i++) {
 
 // Función para pintar los círculos
 function pintar_circulos(array $colores) {    
-    echo "<Table>";
+    echo "<table>";
     foreach ($colores as $color) {
         echo "<tr>";
         echo "<svg width='60' height='45'>";
@@ -44,11 +46,8 @@ function pintar_circulos(array $colores) {
         echo "</svg>";
         echo "</tr>";
     }
-    echo "</Table>";
+    echo "</table>";
 }
-
-
-
 ?> 
 
 <!DOCTYPE html>
@@ -63,7 +62,11 @@ function pintar_circulos(array $colores) {
         <?php pintar_circulos($patron); 
          echo '<form action="formulario.html" method="post">'; 
          echo '<button type="submit" name="Volver">No me gusta el patron</button>';
+         echo '</form>'; 
+        echo '<form action="circulos-negros.php" method="post">'; 
+         echo '<button type="submit" name="negro">Empecemos</button>';
          echo '</form>'; ?>
+
 
     </body>
 </html>
